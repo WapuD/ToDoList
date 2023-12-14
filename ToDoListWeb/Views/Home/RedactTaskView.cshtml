@@ -1,0 +1,57 @@
+﻿@model ToDoList.Models.Tasks
+@{
+    ViewData["Title"] = "Редактирование задачи";
+}
+
+<h2>Редактирование задачи</h2>
+<form asp-action="RedactTask" asp-route-id="@Model.TaskId" class="needs-validation" novalidate="form">
+    <input asp-for="TaskId" class="form-control" hidden />
+    <input asp-for="TaskUserId" class="form-control" hidden />
+@*     @if (User.Identity.IsAuthenticated)
+    { *@
+        <div class="form-group">
+            <label asp-for="TaskName" class="col-md-4">Название задачи</label>
+            <div class="col-md-8">
+                <input asp-for="TaskName" class="form-control" />
+                <span asp-validation-for="TaskName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TaskDescription" class="col-md-4">Описание задачи</label>
+            <div class="col-md-8">
+                <textarea asp-for="TaskDescription" class="form-control"></textarea>
+                <span asp-validation-for="TaskDescription" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TaskDuration" class="col-md-4">Срок выполнения задачи</label>
+            <div class="col-md-8">
+                <input asp-for="TaskDuration" class="form-control" type="date" />
+                <span asp-validation-for="TaskDuration" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TaskPriority" class="col-md-4">Приоритет задачи</label>
+            <div class="col-md-8">
+                <select asp-for="TaskPriority" class="form-control">
+                    <option value="Низкий">Низкий</option>
+                    <option value="Средний">Средний</option>
+                    <option value="Высокий">Высокий</option>
+                </select>
+                <span asp-validation-for="TaskPriority" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TaskIsConfirm" class="col-md-4">Подтверждение выполнения задачи</label>
+            <div class="col-md-8">
+                <input asp-for="TaskIsConfirm" type="checkbox" />
+                <span asp-validation-for="TaskIsConfirm" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-8 col-md-offset-4">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+@*     } *@
+</form>

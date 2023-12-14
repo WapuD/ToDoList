@@ -1,0 +1,37 @@
+﻿@using ToDoList.Models
+@model IEnumerable<Users>
+
+@{
+    ViewData["Title"] = "Profiles Page";
+}
+
+<div class="container mt-5">
+    <h1>Profiles</h1>
+    
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>User Name</th>
+                    <th>User Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.UserId</td>
+                        <td>@user.UserName</td>
+                        <td>@user.UserPasswordHash</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+        {
+            <p>No users available.</p>
+        }
+</div>

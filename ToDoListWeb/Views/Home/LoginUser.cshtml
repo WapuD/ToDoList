@@ -1,0 +1,21 @@
+﻿@model ToDoList.Models.UserDTO
+@{
+    ViewData["Title"] = "Authorization Page";
+}
+
+<h2>Авторизация пользователя</h2>
+<form method="post" asp-controller="Home" asp-action="LoginUser">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="UserName"></label><br />
+        <input asp-for="UserName" />
+    </div>
+    <div>
+        <label asp-for="UserPassword"></label><br />
+        <input asp-for="UserPassword" />
+        <span asp-validation-for="UserPassword"></span>
+    </div>
+    <div>
+        <input type="submit" value="Войти" />
+    </div>
+</form>

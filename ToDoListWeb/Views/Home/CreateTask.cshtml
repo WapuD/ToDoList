@@ -1,0 +1,46 @@
+﻿@using ToDoList.Models
+@model Tasks
+
+@{
+    ViewData["Title"] = "Create Task Page";
+}
+
+<form asp-action="CreateTask" method="post">
+    <div class="form-group">
+        <label asp-for="TaskName">Название</label>
+        <input asp-for="TaskName" class="form-control" />
+
+        <label asp-for="TaskDescription">Описание</label>
+        <input asp-for="TaskDescription" class="form-control" />
+
+        <label asp-for="TaskDuration">Срок</label>
+        <input asp-for="TaskDuration" type="datetime-local" class="form-control" />
+
+        <label asp-for="TaskPriority">Приоритет</label>
+        <select asp-for="TaskPriority" class="form-control">
+            <option value="Low">Низкий</option>
+            <option value="Middle">Средний</option>
+            <option value="Hight">Высокий</option>
+        </select>   
+
+        <label asp-for="TaskIsConfirm">Статус</label>
+        <select asp-for="TaskIsConfirm" class="form-control">
+            <option value="false">Не выполнено</option>
+            <option value="true">Выполнено</option>
+        </select>
+
+        <label asp-for="TaskUserId">ID пользователя</label>
+        <select asp-for="TaskUserId" class="form-control">
+            @if (ViewBag.Users != null)
+                @foreach (var id in ViewBag.Users)
+                {
+                    <option value="@id">@id</option>
+                }
+            @if (ViewBag.Users == null)
+            {
+                <option value="1">1</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
