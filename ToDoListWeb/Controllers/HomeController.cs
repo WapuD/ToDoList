@@ -48,8 +48,20 @@ namespace ToDoListWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await I_Client.GetUser(task.TaskUserId);
-                task.TaskUserId = user.UserId;
+                try
+                {
+                    var user = await I_Client.GetUser(task.TaskUserId);
+                    task.TaskUserId = user.UserId;
+                }
+                catch (Exception ex) 
+                {
+                    var users = await I_Client.GetAllUsers();
+                    List<int> ids = new List<int>();
+                    foreach (var user in users)
+                        ids.Add(user.UserId);
+                    ViewBag.Users = ids;
+                    return View("CreateTask"); 
+                }
                 await I_Client.CreateTask(task);
                 return RedirectToAction("Index");
             }
@@ -74,7 +86,7 @@ namespace ToDoListWeb.Controllers
         {
             if (ModelState.IsValid)
                 await I_Client.RedactTask(task.TaskId, task);
-            else return View("RedactTask");
+            else return View("RedactTaskView");
             return RedirectToAction("Index");
         }
 
@@ -126,7 +138,7 @@ namespace ToDoListWeb.Controllers
                 new AuthenticationProperties() { IsPersistent = true });
             }
             else return View("LoginUser");
-            return Redirect("/");
+            return Redirect("/Home/Index");
         }
 
         public async Task<IActionResult> LogoutUser()
