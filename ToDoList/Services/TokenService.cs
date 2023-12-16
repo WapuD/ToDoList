@@ -30,6 +30,5 @@ namespace ToDoList.Services
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.SecretKey)), SecurityAlgorithms.HmacSha256Signature)
             }));
         }
-
     }
 }
